@@ -1,7 +1,7 @@
-import { File } from '@asyncapi/generator-react-sdk';
-import { port } from '../../helpers/index';
+const { File } = require('@asyncapi/generator-react-sdk');
+const { port } = require('../../filters/all.js');
 
-export default function CommonConfigYAMLRender({ asyncapi, params }) {
+function commonConfig({ asyncapi, params }) {
   const serverUrl = asyncapi.server(params.server).url();
 
   return (
@@ -20,3 +20,5 @@ production:
     </File>
   );
 }
+
+module.exports = commonConfig;

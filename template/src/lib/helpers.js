@@ -1,22 +1,44 @@
-import _ from 'lodash';
+const _ = require('lodash');
+const sanitizeFilename = require('sanitize-filename');
 
-export function camelCase(string) {
+function camelCase(string) {
   return _.camelCase(string);
 }
 
-export function pascalCase(string) {
+function pascalCase(string) {
   string = _.camelCase(string);
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export function kebabCase(string) {
+function kebabCase(string) {
   return _.kebabCase(string);
 }
 
-export function capitalize(string) {
+function capitalize(string) {
   return _.capitalize(string);
 }
 
-export function oneLine(string) {
+function oneLine(string) {
   return string.replace(/\n/g, ' ').trim();
 }
+
+function convertToFilename(string, options = { replacement: '-', maxLength: 255 }) {
+  let sanitizedString = sanitizeFilename(string);
+
+  sanitizedString = sanitizedString.replace(/[\s]+/g, options.replacement);
+
+  if (sanitizedString.length > options.maxLength) {
+    sanitizedString = sanitizedString.slice(0, options.maxLength);
+  }
+
+  return sanitizedString;
+}
+
+module.exports = {
+  camelCase,
+  pascalCase,
+  kebabCase,
+  capitalize,
+  oneLine,
+  convertToFilename
+};

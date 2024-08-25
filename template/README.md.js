@@ -1,10 +1,15 @@
-import { File } from '@asyncapi/generator-react-sdk';
+const { File } = require('@asyncapi/generator-react-sdk');
 
-export default function READMEFile({ asyncapi }) {
-    return <File name={'README.md'}>
-        {`# ${asyncapi.info().title()}
-        
-        {{ asyncapi.info().description() | safe }}
-         `}
-    </File>;
+function ReadmeFile({ asyncapi }) {
+    console.log("Hello", asyncapi.info().description());
+    return (
+        <File name={'README.md'}>
+            {`# ${asyncapi.info().title()}
+            
+${asyncapi.info().description() || 'Safe'}
+`}
+        </File>
+    );
 }
+
+module.exports = ReadmeFile;

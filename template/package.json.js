@@ -1,7 +1,7 @@
-import { kebabCase, oneLine } from './src/lib/helpers';
-import { File } from '@asyncapi/generator-react-sdk';
+const { kebabCase, oneLine } = require('./src/lib/helpers');
+const { File } = require('@asyncapi/generator-react-sdk');
 
-export default function packageFile({ asyncapi }) {
+function packageFile({ asyncapi }) {
   const dependencies = {
     '@asyncapi/parser': '^3.1.0',
     'express': '4.19.2',
@@ -33,3 +33,5 @@ export default function packageFile({ asyncapi }) {
     <File name={'package.json'}>{JSON.stringify(packageJSON, null, 2)}</File>
   );
 }
+
+module.exports = packageFile;
